@@ -5,7 +5,7 @@
   "author": "Radoslaw Mejer <radmen@radmen.info>",
   "license": "MIT",
   "bin": {
-    "git-task": "./bin/cli.js"
+    "git-task": "./cli.js"
   },
   "dependencies": {
     "chalk": "^2.0.1",

@@ -4,8 +4,8 @@ const R = require('ramda');
 const chalk = require('chalk');
 const Table = require('cli-table');
 const moment = require('moment');
-const repo = require('../../src/repo');
-const log = require('../../src/log');
+const repo = require('../repo');
+const log = require('../log');
 
 const list = async branch => {
     const tasks = await repo.read(branch);

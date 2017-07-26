@@ -2,7 +2,7 @@
 
 const yargs = require('yargs');
 
-yargs.commandDir('./cmd')
+yargs.commandDir('./src/cmd')
     .demandCommand()
     .help()
     .option('b', {

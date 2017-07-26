@@ -1,7 +1,7 @@
 const R = require('ramda');
 const chalk = require('chalk');
-const repo = require('../../src/repo');
-const log = require('../../src/log');
+const repo = require('../repo');
+const log = require('../log');
 
 const validate = task => {
     if (!task) {
