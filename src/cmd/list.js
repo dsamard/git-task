@@ -10,7 +10,7 @@ const log = require('../log');
 const list = async branch => {
     const tasks = await repo.read(branch);
     const table = new Table({
-        head: ['id', 'task', 'created'],
+        head: ['', 'id', 'task', 'created'],
         chars: {
             top: ' ', 'top-mid': ' ', 'top-left': ' ', 'top-right': ' ',
             left: '', 'left-mid': '',
@@ -21,7 +21,8 @@ const list = async branch => {
     });
 
     tasks.forEach((item, index) => {
-        table.push([index + 1, item.task, moment(item.createdAt).fromNow()]);
+        const finished = item.finished ? chalk.green('✓') : ' ';
+        table.push([finished, index + 1, item.task, moment(item.createdAt).fromNow()]);
     });
 
     console.log(table.toString());
