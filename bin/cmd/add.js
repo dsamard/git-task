@@ -1,10 +1,7 @@
-#!/usr/bin/env node
-
 const R = require('ramda');
-const program = require('commander');
 const chalk = require('chalk');
-const repo = require('../src/repo');
-const log = require('../src/log');
+const repo = require('../../src/repo');
+const log = require('../../src/log');
 
 const validate = task => {
     if (!task) {
@@ -22,11 +19,12 @@ const add = async (task, branch) => {
     await repo.write(branch, tasksList);
 };
 
-program
-    .option('-b, --branch [name]', 'use selected git branch')
-    .parse(process.argv);
+exports.command = 'add <task...>';
+exports.desc = 'Add task';
+exports.builder = yargs => { };
+exports.handler = argv => {
+    const task = R.trim(argv.task.join(' '));
 
-const task = R.trim(program.args.join(' '));
-
-add(task, program.branch || 'master')
-    .catch(log.error);
+    add(task, argv.branch)
+        .catch(log.error);
+};

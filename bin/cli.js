@@ -1,8 +1,15 @@
 #!/usr/bin/env node
 
 const program = require('commander');
+const yargs = require('yargs');
 
-program.version('0.1.0')
-    .command('add', 'Add new task');
-
-program.parse(process.argv);
+yargs.commandDir('./cmd')
+    .demandCommand()
+    .help()
+    .option('b', {
+        alias: 'branch',
+        default: 'master',
+        describe: 'use selected git branch',
+        type: 'string',
+    })
+    .argv

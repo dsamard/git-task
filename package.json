@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "chalk": "^2.0.1",
-    "commander": "^2.11.0",
     "es6-promisify": "^5.0.0",
-    "ramda": "^0.24.1"
+    "ramda": "^0.24.1",
+    "yargs": "^8.0.2"
   }
 }
