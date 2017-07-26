@@ -1,0 +1,16 @@
+{
+  "name": "@radmen/git-task",
+  "version": "0.1.0",
+  "description": "Silly GIT-based local todo list",
+  "author": "Radoslaw Mejer <radmen@radmen.info>",
+  "license": "MIT",
+  "bin": {
+    "git-task": "./bin/cli.js"
+  },
+  "dependencies": {
+    "chalk": "^2.0.1",
+    "commander": "^2.11.0",
+    "es6-promisify": "^5.0.0",
+    "ramda": "^0.24.1"
+  }
+}
