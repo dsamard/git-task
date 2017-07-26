@@ -15,7 +15,8 @@ const validate = task => {
 const add = async (task, branch) => {
     validate(task);
 
-    const tasksList = R.append({ task }, await repo.read(branch));
+    const createdAt = +new Date();
+    const tasksList = R.append({ task, createdAt }, await repo.read(branch));
 
     console.log(chalk.green(`Adding task: ${task}`));
     await repo.write(branch, tasksList);
