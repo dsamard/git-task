@@ -2,6 +2,7 @@ const R = require('ramda');
 const chalk = require('chalk');
 const repo = require('../repo');
 const log = require('../log');
+const listTasks = require('../listTasks');
 
 const validate = task => {
     if (!task) {
@@ -15,7 +16,7 @@ const add = async (task, branch) => {
     const createdAt = +new Date();
     const tasksList = R.append({ task, createdAt, finished: false }, await repo.read(branch));
 
-    console.log(chalk.green(`Adding task: ${task}`));
+    console.log(chalk.green(`Created: ${task}`));
     await repo.write(branch, tasksList);
 };
 
@@ -27,5 +28,6 @@ exports.handler = argv => {
     const task = R.trim(argv.task.join(' '));
 
     add(task, argv.branch)
+        .then(() => listTasks(argv.branch))
         .catch(log.error);
 };

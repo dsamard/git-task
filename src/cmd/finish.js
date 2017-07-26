@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 const repo = require('../repo');
 const log = require('../log');
+const listTasks = require('../listTasks');
 
 const updateListItem = (taskIndex, value) =>
     list => list.map((item, index) => {
@@ -34,5 +35,6 @@ exports.builder = yargs => yargs.option('u', {
 });
 exports.handler = argv => {
     finish(argv.id, argv.branch, argv.undo)
+        .then(() => listTasks(argv.branch))
         .catch(log.error);
 };
