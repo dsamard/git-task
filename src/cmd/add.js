@@ -13,13 +13,14 @@ const add = async (task, branch) => {
     validate(task);
 
     const createdAt = +new Date();
-    const tasksList = R.append({ task, createdAt }, await repo.read(branch));
+    const tasksList = R.append({ task, createdAt, finished: false }, await repo.read(branch));
 
     console.log(chalk.green(`Adding task: ${task}`));
     await repo.write(branch, tasksList);
 };
 
 exports.command = 'add <task...>';
+exports.aliases = ['a'];
 exports.desc = 'Add task';
 exports.builder = yargs => { };
 exports.handler = argv => {
