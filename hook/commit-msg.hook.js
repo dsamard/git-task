@@ -13,15 +13,16 @@ if (process.argv.length > 3) {
 
 const [msgFile] = process.argv.slice(-1);
 
-const regex = /git-task#(\d+)/;
+const pattern = 'git-task#(\\d+)';
 
 const findTaskId = R.pipe(
     R.split(/\r?\n/),
     R.reject(R.test(/^#/)),
-    R.find(R.test(regex)),
+    R.join('\n'),
+    R.match(new RegExp(pattern)),
     R.cond([
-        [R.equals(undefined), R.always(null)],
-        [R.T, R.compose(parseInt, R.nth(1), R.match(regex))],
+        [R.isEmpty, R.always(null)],
+        [R.T, R.compose(parseInt, R.nth(1))],
     ])
 );
 
@@ -43,7 +44,7 @@ const finishTask = async () => {
     }
 
     await repo.updateTask(branch, taskId, { finished: true });
-    await fs.writeFile(msgFile, message.replace(regex, ''));
+    await fs.writeFile(msgFile, message.replace(new RegExp(pattern, 'g'), ''));
 
     return true;
 };

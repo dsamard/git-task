@@ -15,16 +15,13 @@ const [msgFile] = process.argv.slice(-1);
 const taskToLine = ({ task, id }) => `# ${task} git-task#${id}`;
 
 const buildMessage = tasks => (`
-# Below is list of current tasks.
-#
-# You can use one of them as commit subject.
-# Simply copy selected line to the first line of commit message,
-# and uncomment it.
-#
-# Don't worry about '(finished #N)' postfix, it will be removed.
-# Selected task will be marked as finished.
+# ~~> Active tasks:
 #
 ${tasks.map(taskToLine).join('\n')}
+#
+# To finish selected task simply uncomment the corresponding line.
+#
+# Don't worry about 'git-task#N' part, it will be removed.
 `);
 
 const setCommitMessage = async () => {
