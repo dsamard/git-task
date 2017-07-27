@@ -21,7 +21,7 @@ const add = async (task, branch) => {
 };
 
 exports.command = 'add <task...>';
-exports.aliases = ['a'];
+exports.aliases = ['*', 'a'];
 exports.desc = 'Add task';
 exports.builder = yargs => { };
 exports.handler = argv => {
