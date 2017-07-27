@@ -1,3 +1,4 @@
+const R = require('ramda');
 const chalk = require('chalk');
 const log = require('../log');
 const repo = require('../repo');
@@ -5,10 +6,9 @@ const listTasks = require('../listTasks');
 
 const deleteTask = async (branch, id) => {
     const list = await repo.read(branch);
-    const predicate = (item, index) => index !== (id - 1);
 
     console.log(chalk.green('Removing task'));
-    await repo.write(branch, list.filter(predicate));
+    await repo.write(branch, R.reject(R.propEq('id', id), list));
 };
 
 exports.command = 'delete <id>';

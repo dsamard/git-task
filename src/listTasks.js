@@ -16,9 +16,9 @@ module.exports = async branch => {
         }
     });
 
-    tasks.forEach((item, index) => {
+    tasks.forEach(item => {
         const finished = item.finished ? chalk.green('✓') : ' ';
-        table.push([finished, index + 1, item.task, moment(item.createdAt).fromNow()]);
+        table.push([finished, item.id, item.task, moment(item.createdAt).fromNow()]);
     });
 
     console.log(table.toString());

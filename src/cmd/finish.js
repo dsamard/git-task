@@ -1,28 +1,22 @@
+const R = require('ramda');
 const chalk = require('chalk');
 const repo = require('../repo');
 const log = require('../log');
 const listTasks = require('../listTasks');
 
-const updateListItem = (taskIndex, value) =>
-    list => list.map((item, index) => {
-        return index === taskIndex ? Object.assign({}, item, value) : item;
-    });
-
 const finish = async (taskId, branch, undo) => {
     const entries = await repo.read(branch);
-    const taskIndex = taskId - 1;
-    const update = updateListItem(taskIndex, {
-        finished: undo ? false : true,
-    });
+    const task = entries.find(R.propEq('id', taskId));
 
-    if (!entries[taskIndex]) {
+    if (!task) {
         throw new Error('Unknown task');
     }
 
-    const { task } = entries[taskIndex];
-    await repo.write(branch, update(entries));
+    await repo.updateTask(branch, taskId, {
+        finished: undo ? false : true,
+    });
 
-    console.log(chalk.green(`${undo ? 'Unmarked' : 'Finished'}: ${task}`));
+    console.log(chalk.green(`${undo ? 'Unmarked' : 'Finished'}: ${task.task}`));
 };
 
 exports.command = 'finish <id>';
