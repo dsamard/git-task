@@ -1,4 +1,5 @@
 const fs = require('fs');
+const promisify = require('es6-promisify');
 const path = require('path');
 
 const getGitRepositoryDir = fileName => path.join(process.cwd(), '.git', fileName || '');
@@ -18,7 +19,12 @@ const isGitRepository = () => {
     return promise.catch(() => false);
 };
 
+const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
+
 module.exports = {
     isGitRepository,
     getGitRepositoryDir,
+    readFile,
+    writeFile,
 };
