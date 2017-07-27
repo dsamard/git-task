@@ -9,10 +9,11 @@ That was the moment when I realized that I need a tool, which can allow me to or
 
 # Wait, another todo manager?
 
-Well, not exactly. I like to plan next steps. For me it's quite common to **plan next commits** (using [imperative mood](https://chris.beams.io/posts/git-commit/#imperative)). 
+Well, not exactly. I like to plan next steps. For me it's quite common to **plan next commits**.
 
 This tool allows me to plan my next commits, and later use them as my actual [commit subjects](https://chris.beams.io/posts/git-commit/#imperative).  
-During commit `git-task` will prepare commit message. All that needs to be done is uncommenting the line with commit which I wanted to create. After that task will be marked as finished.
+
+During commit `git-task` will prepare commit message. All that needs to be done is uncommenting the line with commit which I want to create. After that task will be marked as finished.
 
 [![asciicast](https://asciinema.org/a/130907.png)](https://asciinema.org/a/130907)
 
