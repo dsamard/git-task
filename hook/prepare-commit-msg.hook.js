@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 const R = require('ramda');
-const fs = require('fs');
-const promisify = require('es6-promisify');
+const fsUtil = require('../src/fs');
 const repo = require('../src/repo');
 const log = require('../src/log');
 
@@ -33,10 +32,10 @@ const setCommitMessage = async () => {
         process.exit(0);
     }
 
-    const commitMsg = await promisify(fs.readFile)(msgFile);
+    const commitMsg = await fsUtil.readFile(msgFile);
     const body = buildMessage(tasks);
 
-    await promisify(fs.writeFile)(msgFile, `${body}${commitMsg}`);
+    await fsUtil.writeFile(msgFile, `${body}${commitMsg}`);
     process.exit(0);
 };
 

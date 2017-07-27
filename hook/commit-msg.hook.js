@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 const R = require('ramda');
-const fs = require('../src/fs');
-const promisify = require('es6-promisify');
+const fsUtil = require('../src/fs');
 const repo = require('../src/repo');
 const log = require('../src/log');
 const listTasks = require('../src/listTasks');
@@ -30,7 +29,7 @@ const finishTask = async () => {
     const branch = await repo.getCurrentBranch();
     const tasks = await repo.read(branch);
 
-    const message = (await fs.readFile(msgFile)).toString();
+    const message = (await fsUtil.readFile(msgFile)).toString();
     const taskId = findTaskId(message);
 
     if (!taskId) {
@@ -44,7 +43,7 @@ const finishTask = async () => {
     }
 
     await repo.updateTask(branch, taskId, { finished: true });
-    await fs.writeFile(msgFile, message.replace(new RegExp(pattern, 'g'), ''));
+    await fsUtil.writeFile(msgFile, message.replace(new RegExp(pattern, 'g'), ''));
 
     return true;
 };

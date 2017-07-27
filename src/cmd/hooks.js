@@ -1,7 +1,6 @@
 const path = require('path');
-const fs = require('fs');
+const fsUtil = require('../fs');
 const chalk = require('chalk');
-const promisify = require('es6-promisify');
 const log = require('../log');
 
 const hookFiles = ['commit-msg.hook.js', 'prepare-commit-msg.hook.js'];
@@ -10,8 +9,7 @@ const hooks = hookFiles.map(name => ({
     name: name.replace('.hook.js', ''),
 }));
 
-const symlink = promisify(fs.symlink);
-const fileExists = path => promisify(fs.stat)(path)
+const fileExists = path => fsUtil.stat(path)
     .then(() => true)
     .catch(() => false);
 
@@ -29,7 +27,7 @@ const installSingleHook = async hook => {
         return { status: status.HOOK_EXISTS, hook };
     }
 
-    return symlink(hook.path, dest)
+    return fsUtil.symlink(hook.path, dest)
         .then(() => ({ status: status.HOOK_CREATED, hook }))
         .catch(() => ({ status: status.SYMLINK_FAILED, hook }));
 };
