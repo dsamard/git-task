@@ -36,7 +36,7 @@ For advanced usage (preparing commit message; automatic task finishing) it's req
 # Installation
 
 ```
-@TODO
+npm i -g @radmen/git-task
 ```
 
 # Available commands
