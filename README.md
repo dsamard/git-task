@@ -1,21 +1,23 @@
 # git-task
 [![asciicast](https://asciinema.org/a/130906.png)](https://asciinema.org/a/130906)
 
-Recently I've learned about [keeping TODOs in git](https://coderwall.com/p/r2g2rq/keep-todos-in-git) which, I thought, was a good idea.
+It's quite common for me to plan next commits. I've been looking for some suitable solution which could help me manage the things I want to do.
 
-I need to write branch specific tasks so I know what's next todo (specially when I need to switch between branches). I've found that empty git commits are not so practical.
+But not a todo app. Something that is integrated with git. First I've tried to use mashup of `git config` and bash prompt. Later I've found about [adding empty TODO commits](https://coderwall.com/p/r2g2rq/keep-todos-in-git). I've tried using [twig](https://github.com/rondevera/twig). Yet none of those solutions suite my needs.
 
-That was the moment when I realized that I need a tool, which can allow me to organize *my* tasks for given feature branch.
+So I've created my own.
 
 # Wait, another todo manager?
 
-Well, not exactly. I like to plan next steps. For me it's quite common to **plan next commits**.
-
-This tool allows me to plan my next commits, and later use them as my actual [commit subjects](https://chris.beams.io/posts/git-commit/#imperative).  
-
-During commit `git-task` will prepare commit message. All that needs to be done is uncommenting the line with commit which I want to create. After that task will be marked as finished.
+Well, yes and no. Yes, it stores a list of todos. No, they're not *just* todos. Those are my **future commits**.  
+`git-task` allows to define such commits, and later use them during actual commit.
 
 [![asciicast](https://asciinema.org/a/130907.png)](https://asciinema.org/a/130907)
+
+Idea is simple. Define future commits (aka tasks), pick one and start working. When finished type `git commit`.  
+`git-task` will generate commit message for you - simply pick one of tasks, uncomment it and save the message. Task will be automatically marked as finished.
+
+**Protip**: I try to name my commits using [imperative mood](https://chris.beams.io/posts/git-commit/#imperative). It's also quite useful for defining a task so it's a win-win :)
 
 # How does it work?
 
@@ -95,7 +97,7 @@ git task hooks
 
 For various reasons this command may fail. If so, hooks need to be installed manually.
 
-# No tests!
+# Software provided *as is*
 
 This "software" is for my private use. For my own reasons I decided to skip writing test suite.
 
